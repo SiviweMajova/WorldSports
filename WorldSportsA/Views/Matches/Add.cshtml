@@ -1,0 +1,165 @@
+﻿
+
+<link href="@Url.Content("~/Content/css/animate.css" )" rel="stylesheet" />
+<link href="@Url.Content("~/Content/css/bootstrap.css" )" rel="stylesheet" />
+<link href="@Url.Content("~/Content/css/style.css" )" rel="stylesheet" />
+<link href="@Url.Content("~/Content/css/custom.css" )" rel="stylesheet" />
+<link href="@Url.Content("~/Content/css/export.css" )" rel="stylesheet" />
+<link href="@Url.Content("~/Content/css/font-awesome.css" )" rel="stylesheet" />
+<link href="@Url.Content("~/Content/css/graph.css" )" rel="stylesheet" />
+<link href="@Url.Content("~/Content/css/jqcandlestick.css" )" rel="stylesheet" />
+<link href="@Url.Content("~/Content/css/monthly.css" )" rel="stylesheet" />
+<link href="@Url.Content("~/Content/css/owl.carousel.css" )" rel="stylesheet" />
+<link href="@Url.Content("~/Content/css/SidebarNav.min.css" )" rel="stylesheet" />
+<link href="@Url.Content("~/Content/fonts/fontawesome-webfont.eot" )" />
+<link href="@Url.Content("~/Content/fonts/glyphicons-halflings-regular.woff2" )" />
+<link href="@Url.Content("~/Content/fonts/fontawesome-webfont.ttf" )" />
+<link href="@Url.Content("~/Content/fonts/fontawesome-webfont.woff" )" />
+<link href="@Url.Content("~/Content/fonts/fontawesome-webfont.woff2" )" />
+<link href="@Url.Content("~/Content/fonts/FontAwesome.otf" )" />
+<link href="@Url.Content("~/Content/fonts/glyphicons-halflings-regular.eot" )" />
+<link href="@Url.Content("~/Content/fonts/glyphicons-halflings-regular.ttf" )" />
+<link href="@Url.Content("~/Content/fonts/glyphicons-halflings-regular.woff" )" />
+<script src="@Url.Content("~/Content/js/amcharts.js" )"></script>
+<script src="@Url.Content("~/Content/js/bootstrap.js" )"></script>
+<script src="@Url.Content("~/Content/js/Chart.bundle.js" )"></script>
+<script src="@Url.Content("~/Content/js/Chart.js" )"></script>
+<script src="@Url.Content("~/Content/js/Chart.min.js" )"></script>
+<script src="@Url.Content("~/Content/js/chartinator.js" )"></script>
+<script src="@Url.Content("~/Content/js/classie.js" )"></script>
+<script src="@Url.Content("~/Content/js/custom.js" )"></script>
+<script src="@Url.Content("~/Content/js/export.min.js" )"></script>
+<script src="@Url.Content("~/Content/js/index.js" )"></script>
+<script src="@Url.Content("~/Content/js/index1.js" )"></script>
+<script src="@Url.Content("~/Content/js/index2.js" )"></script>
+<script src="@Url.Content("~/Content/js/jquery-1.11.1.min.js" )"></script>
+<script src="@Url.Content("~/Content/js/jquery.flot.js" )"></script>
+<script src="@Url.Content("~/Content/js/jquery.jqcandlestick.min.js" )"></script>
+<script src="@Url.Content("~/Content/js/jquery.nicescroll.js" )"></script>
+<script src="@Url.Content("~/Content/js/light.js" )"></script>
+<script src="@Url.Content("~/Content/js/metisMenu.min.js" )"></script>
+<script src="@Url.Content("~/Content/js/modernizr.custom.js" )"></script>
+<script src="@Url.Content("~/Content/js/monthly.js" )"></script>
+<script src="@Url.Content("~/Content/js/owl.carousel.js" )"></script>
+<script src="@Url.Content("~/Content/js/pie-chart.js" )"></script>
+<script src="@Url.Content("~/Content/js/scripts.js" )"></script>
+<script src="@Url.Content("~/Content/js/serial.js" )"></script>
+<script src="@Url.Content("~/Content/js/SidebarNav.min.js" )"></script>
+<script src="@Url.Content("~/Content/js/SimpleChart.js" )"></script>
+<script src="@Url.Content("~/Content/js/utils.js" )"></script>
+<script src="@Url.Content("~/Content/js/validator.min.js" )"></script>
+
+<script>
+    $('.sidebar-menu').SidebarNav()
+</script>
+<!-- //side nav js -->
+<!-- Classie --><!-- for toggle left push menu script -->
+<script>
+    var menuLeft = document.getElementById('cbp-spmenu-s1'),
+        showLeftPush = document.getElementById('showLeftPush'),
+        body = document.body;
+
+    showLeftPush.onclick = function () {
+        classie.toggle(this, 'active');
+        classie.toggle(body, 'cbp-spmenu-push-toright');
+        classie.toggle(menuLeft, 'cbp-spmenu-open');
+        disableOther('showLeftPush');
+    };
+
+    function disableOther(button) {
+        if (button !== 'showLeftPush') {
+            classie.toggle(showLeftPush, 'disabled');
+        }
+    }
+</script>
+
+
+<div class="main-content">
+    <div class="main-page">
+
+
+        @model WorldSportsA.Models.Match
+
+        @{
+            ViewBag.Title = "Add";
+            Layout = "~/Views/_admin.cshtml";
+        }
+        <div class="panel-body widget-shadow">
+
+            <h2 class="title1">Play Match</h2>
+
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.FixtureId, "Fixture (Home vs Away)", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(model => model.FixtureId, (IEnumerable<SelectListItem>)ViewData["MyMatches"], new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.FixtureId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.HomeTeamGoals, "Home Goals", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.HomeTeamGoals, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.HomeTeamGoals, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.AwayTeamGoals, "Away Goals", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.AwayTeamGoals, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.AwayTeamGoals, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.HScorerId, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.HScorerId, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.HScorerId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.AScorerId, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.AScorerId, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.AScorerId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Comment, "Comment", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Comment, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Comment, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Create Match" class="btn btn-primary" />
+                        </div>
+                        <div>
+                            @Html.ActionLink("Back to List", "Index")
+                        </div>
+
+                    </div>
+                </div>
+             }
+
+        </div>
+    </div>
+    <div class="clearfix"> </div>
+</div>
